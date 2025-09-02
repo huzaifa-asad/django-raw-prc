@@ -7,14 +7,9 @@
 </head>
 <body>
     <h1>All Student Data</h1>
-    {% comment %} {{students}} {% endcomment %}
-    {% if students %}
-    <h1>Student List:</h1>
-    <ul>
-        {% for student in students %}
-        <li>{{student.name}} - {{student.email}} - {{student.city}}</li>
-        {% endfor %}
-    </ul>
+    {% if student %}
+    <h1>Student</h1>
+    <h3>{{student.name}} - {{student.email}} - {{student.city}}</h3>
     {% else %}
     <h1>No Data</h1>
     {% endif %}
