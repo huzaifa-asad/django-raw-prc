@@ -10,5 +10,12 @@
     <form action="">
         {{form}}
     </form>
+
+    {% comment %} {% for field in form %}
+    <form action="">
+        {{field.label_tag}}
+        {{field}}
+    </form>
+    {% endfor %} {% endcomment %}
 </body>
 </html>

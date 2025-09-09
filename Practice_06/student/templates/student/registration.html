@@ -7,13 +7,18 @@
 </head>
 <body>
     <h1>Student Registration</h1>
-    <form action="">
+    {% comment %} <form action="">
         <ul>
            {{form.as_ul}}
         </ul>
 
         <input type="submit" value="Submit">
-    </form>
+    </form> {% endcomment %}
 
+    <form action="">
+        First Name: {{form.first_name}}
+        <br />
+        Last Name: {{form.last_name}}
+    </form>
 </body>
 </html>
