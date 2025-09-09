@@ -8,5 +8,6 @@ class Registration(forms.Form):
     city = forms.CharField()
     
 class Login(forms.Form):
+    username = forms.CharField()
     email = forms.EmailField()
-    password = forms.CharField()
+    password = forms.CharField(widget=forms.HiddenInput())
