@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from student.forms import Registration
+from django.http import HttpResponseRedirect
 
 def register(req):
     if req.method == 'POST':
@@ -12,6 +13,12 @@ def register(req):
             print('Name:', name)
             print('Email:', email)
             print('Password:', password)
+            # to save from resubmission form
+            return HttpResponseRedirect('/student/success/')
     else:
         form = Registration()
     return render(req, 'student/register.html', {'form': form})
+
+
+def reg_success(req):
+    return render(req, 'student/success.html')
