@@ -3,13 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Student Registration</title>
+    <style>
+        .custom-error-css {
+            color: red
+        }
+    </style>
 </head>
 <body>
-    <form action="" method="post">
+    <h1>Student Registration</h1>
+    {% comment %} <form action="" method="post" novalidate>
         {% csrf_token %}
         {{form.as_p}}
         <input type="submit" value="Submit">
+    </form> {% endcomment %}
+
+
+    <form action="" method="post" novalidate>
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        {% for field in form %}
+        <div>
+            {{field.label_tag}} {{field}} <span class="custom-error-css">{{field.errors| striptags}}</span> 
+        </div>
+        {% endfor %}
+        <input type="submit" value="Submit">
     </form>
+
 </body>
 </html>
