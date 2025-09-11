@@ -1,8 +1,14 @@
 from django import forms
+from django.core import validators
 
+# Custom Validator
+def include_gmail(value):
+    if value[:] != 'gmail.com':
+        raise forms.ValidationError('Sign up with email only!')
+    
 class Registration(forms.Form):
     name = forms.CharField()
-    email = forms.EmailField()
+    email = forms.EmailField(validators=[include_gmail])
     password = forms.CharField(widget=forms.PasswordInput)
     
     
@@ -30,4 +36,9 @@ class Registration(forms.Form):
                 self.add_error('password', 'Enter correct password: minimum 8 characters including a special character')
         
         return cleaned_data
+    
+    # Custom Validator
+    def include_gmail(value):
+        if value != 'gmail.com':
+            raise forms.ValidationError('Sign up with email only!')
     
