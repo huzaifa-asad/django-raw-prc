@@ -5,7 +5,11 @@ from django.core.validators import RegexValidator
 
 def validate_pin_length(value):
     if len(str(value)) != 6:
-        raise ValidationError("Pin code must be exactly 6 digits long.")
+        raise ValidationError("Pin code must be exactly 6-digits long.")
+
+def mobile_number_len(value):
+    if len(str(value)) != 10:
+        raise ValidationError("Mobile number must be exactly 10-digit")
 
 
 STATE_CHOICE = (("AL","Alabama"),("AK","Alaska"),("AZ","Arizona"),("AR","Arkansas"),("CA", "California"),("CO", "Colorado"),
@@ -26,11 +30,12 @@ class Profile(models.Model):
     city = models.CharField(max_length=100)
     pin = models.PositiveIntegerField(
         validators=[validate_pin_length],
-        help_text="Enter 6 digit Pin Code")
+        help_text="Enter 6-digit Pin Code")
     state = models.CharField(choices=STATE_CHOICE, max_length=100)
     mobile = models.CharField(
         max_length=10,
-        validators=[RegexValidator(regex=r'^/d{10}$')],
+        # validators=[RegexValidator(regex=r'^/d{10}$')],
+        validators=[mobile_number_len],
         help_text='Enter a 10-digit mobile number')
     email = models.EmailField()
     job_city = models.CharField(max_length=50)
