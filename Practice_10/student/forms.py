@@ -20,6 +20,17 @@ JOB_CITY_CHOICES = [
 ]
 
 class ProfileForm(forms.ModelForm):
+    gender = forms.ChoiceField(
+        choices=GENDER_CHOICES,
+        widget=forms.RadioSelect()
+    )
+    
+    job_city = forms.MultipleChoiceField(
+        choices=JOB_CITY_CHOICES,
+        widget=forms.CheckboxSelectMultiple,
+        label="Preferred Job Cities",
+        help_text="Select one or more cities where you prefer to work"
+    )
     class Meta:
         model = Profile
         fields = [
@@ -41,7 +52,14 @@ class ProfileForm(forms.ModelForm):
         }
         
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control'}),
-            'dob': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter your name'}),
+            'dob': forms.DateInput(attrs={'class': 'form-control', 'id': 'datepicker', 'type': 'date'}),
+            'locality': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Write your area name'}),
+            'city': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'City'}),
+            'pin': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': '6-digit PIN code'}),
+            'state': forms.Select(attrs={'class': 'form-select'}),
+            'mobile': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter 10-digit mobile number'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email Address'}),
+            'job_city': forms.CheckboxSelectMultiple(attrs={'class': 'form-checkbox'}, choices=JOB_CITY_CHOICES),
         }
             
