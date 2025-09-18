@@ -1,5 +1,108 @@
 {% extends "student/base.html" %}
 
 {% block left-content %}
-<h1>Candidate Details</h1>
+<style>
+  .candidate-card { max-width: 920px; background: #fff; border: 1px solid #e6e6e6; border-radius: 12px; padding: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
+  .candidate-header { display: flex; align-items: center; gap: 16px; border-bottom: 1px solid #f0f0f0; padding-bottom: 16px; margin-bottom: 16px; }
+  .candidate-avatar { width: 96px; height: 96px; border-radius: 12px; object-fit: cover; border: 1px solid #eee; background: #fafafa; }
+  .candidate-name { margin: 0; font-size: 1.6rem; }
+  .candidate-meta { color: #666; margin-top: 4px; font-size: 0.95rem; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px 20px; }
+  .field { display: grid; gap: 4px; }
+  .label { color: #666; font-size: 0.85rem; text-transform: uppercase; letter-spacing: .04em; }
+  .value { font-weight: 600; }
+  .actions { margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap; }
+  .btn { display: inline-block; padding: 8px 14px; border-radius: 8px; text-decoration: none; border: 1px solid #e0e0e0; background: #f8f8f8; color: #333; }
+  .btn.primary { background: #2563eb; border-color: #2563eb; color: #fff; }
+  .muted { color: #999; font-style: italic; }
+</style>
+
+<div class="candidate-card">
+  <div class="candidate-header">
+    {% if candidate.profile_img %}
+      <img class="candidate-avatar" src="{{ candidate.profile_img.url }}" alt="{{ candidate.name|default:'Candidate' }}">
+    {% else %}
+      <div class="candidate-avatar" aria-label="No profile image"></div>
+    {% endif %}
+
+    <div>
+      <h1 class="candidate-name">{{ candidate.name|default:"Unnamed Candidate" }}</h1>
+      <div class="candidate-meta">
+        {{ candidate.email|default:"—" }} ·
+        {{ candidate.mobile_number|default:"—" }}
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="field">
+      <div class="label">Date of Birth</div>
+      <div class="value">{{ candidate.dob|date:"M d, Y"|default:"—" }}</div>
+    </div>
+
+    <div class="field">
+      <div class="label">Gender</div>
+      <div class="value">
+        {{ candidate.gender|default:"—" }}
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="label">Locality</div>
+      <div class="value">{{ candidate.locality|default:"—" }}</div>
+    </div>
+
+    <div class="field">
+      <div class="label">City</div>
+      <div class="value">{{ candidate.city|default:"—" }}</div>
+    </div>
+
+    <div class="field">
+      <div class="label">State</div>
+      <div class="value">{{ candidate.state|default:"—" }}</div>
+    </div>
+
+    <div class="field">
+      <div class="label">Pin Code</div>
+      <div class="value">{{ candidate.pin|default:"—" }}</div>
+    </div>
+
+    <div class="field">
+      <div class="label">Job City</div>
+      <div class="value">{{ candidate.job_city|default:"—" }}</div>
+    </div>
+
+    <div class="field">
+      <div class="label">Email</div>
+      <div class="value">
+        {% if candidate.email %}
+          <a href="mailto:{{ candidate.email|urlencode }}">{{ candidate.email }}</a>
+        {% else %}
+          <span class="muted">—</span>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="label">Mobile</div>
+      <div class="value">
+        {% if candidate.mobile %}
+          <a href="tel:{{ candidate.mobile }}">{{ candidate.mobile }}</a>
+        {% else %}
+          <span class="muted">—</span>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <a class="btn" href="{% url 'home' %}">← Back to list</a>
+    {% if candidate.id %}
+      <a class="btn" href="{% url 'candidate_detail' candidate.id %}">View</a>
+      {# Edit/Delete URLs are not defined yet; uncomment when routes exist #}
+      {# <a class="btn primary" href="{% url 'candidate_edit' candidate.id %}">Edit</a> #}
+      {# <a class="btn" href="{% url 'candidate_delete' candidate.id %}">Delete</a> #}
+    {% endif %}
+  </div>
+</div>
 {% endblock left-content %}
