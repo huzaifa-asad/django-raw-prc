@@ -1,3 +1,14 @@
 venv
 __pycache__
 db.sqlite3
+media
+*.pyc
+.DS_Store
+*.log
+*.pot
+*.mo
+*.sqlite3
+*.env
+*.egg-info
+.idea
+.vscode
