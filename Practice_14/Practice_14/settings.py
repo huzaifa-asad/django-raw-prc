@@ -123,3 +123,8 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # SESSION_COOKIE_AGE = 400
+
+# File Based Sessions
+# Valid options: 'django.contrib.sessions.backends.file', 'django.contrib.sessions.backends.db', etc.
+SESSION_ENGINE = 'django.contrib.sessions.backends.file'
+SESSION_FILE_PATH = BASE_DIR / 'session'    
