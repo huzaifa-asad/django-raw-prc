@@ -1,19 +1,19 @@
 from django.shortcuts import render
 from datetime import datetime, timedelta, timezone
 
-def setsession(request):
-    request.session['fname'] = 'huzaifa'
-    request.session['lname'] = 'asad'
-    # request.session.set_expiry(10)  # in seconds
-    # request.session.set_expiry(0)  # session expire in browser close
-    return render(request, 'student/setsession.html')
+# def setsession(request):
+#     request.session['fname'] = 'huzaifa'
+#     request.session['lname'] = 'asad'
+#     # request.session.set_expiry(10)  # in seconds
+#     # request.session.set_expiry(0)  # session expire in browser close
+#     return render(request, 'student/setsession.html')
 
-def getsession(request):
-    # first_name = request.session['fname']
-    first_name = request.session.get('fname', 'No')
-    last_name = request.session.get('lname', 'User')
-    return render(request, 'student/getsession.html', {'first_name': first_name,
-                                                    'last_name': last_name})
+# def getsession(request):
+#     # first_name = request.session['fname']
+#     first_name = request.session.get('fname', 'No')
+#     last_name = request.session.get('lname', 'User')
+#     return render(request, 'student/getsession.html', {'first_name': first_name,
+#                                                     'last_name': last_name})
 
 def delsession(request):
     if 'fname' and 'lname' in request.session:
@@ -66,3 +66,22 @@ def checktestcookie(request):
 def deltestcookie(request):
     request.session.delete_test_cookie()
     return render(request, 'student/deltestcookie.html')
+
+
+# File Based Sessions
+
+def set_session(request):
+    request.session['fname'] = 'backend'
+    request.session['lname'] = 'developer'
+    return render(request, 'student/setsession.html')
+
+def get_session(request):
+    first_name = request.session.get('fname')
+    last_name = request.session.get('lname')
+    return render(request, 'student/getsession.html', {'first_name': first_name,
+                                                       'last_name': last_name})
+
+def clear_session(request):
+    request.session.flush()
+    request.session.clear_expired()
+    return render(request, 'student/sessionclear/html')
