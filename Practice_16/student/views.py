@@ -10,3 +10,6 @@ def course(req):
 
 def result(req):
     return render(req, 'student/result.html')
+
+def template_fragment(req):
+    return render(req, 'student/template_fragment_cache.html')
