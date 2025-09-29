@@ -1,0 +1,21 @@
+{% load cache %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template Caching</title>
+</head>
+<body>
+    <h1>Fragment 1</h1>
+    <h1>Fragment 2</h1>
+    <h1>Fragment 3</h1>
+
+    {% cache 30 mycache %}
+    <h1>Fragment 4</h1>
+    <h1>Fragment 5</h1>
+    <h1>Fragment 6</h1>
+    {% endcache %}
+
+</body>
+</html>
