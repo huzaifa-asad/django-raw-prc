@@ -8,4 +8,6 @@ urlpatterns = [
     path('index/', views.home, name="course"),
     path('course/', views.course, name="home"),
     path('result/', cache_page(30)(views.result), name="result"),
+
+    path('template/', views.template_fragment)
 ]
