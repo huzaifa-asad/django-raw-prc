@@ -162,3 +162,19 @@ def connect_db(sender, connection, **kwargs):
     print("Sender: ", sender)
     print("Connection: ", connection)
     print(f"Kwargs: {kwargs}")
+    
+    
+# Create Custom Signals
+
+from django.dispatch import Signal, receiver
+
+# Creating Signal
+notification = Signal()
+
+# Receiver Function
+@receiver(notification)
+def show_notification(sender, **kwargs):
+    print("-------------------------------------")
+    print("Notification")
+    print("sender")
+    print(kwargs)
