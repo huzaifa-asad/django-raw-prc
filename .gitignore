@@ -12,3 +12,4 @@ media
 *.egg-info
 .idea
 .vscode
+node_module
