@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from school.models import Student
 from datetime import date, time
+from django.db.models import Avg, Sum, Min, Max, Count
 
 # Create your views here.
 def home(request):
-    # student_data = Student.objects.all()
+    student_data = Student.objects.all()
     # student_data = Student.objects.filter(name="Talha")
     # student_data = Student.objects.filter(name__exact="Talha")
     
@@ -32,6 +33,25 @@ def home(request):
     # student_data = Student.objects.filter(pass_date__range=("2024-10-1", "2025-10-12"))
     
     # student_data = Student.objects.filter(admission_date__year=2024)
-    student_data = Student.objects.filter(admission_date__time__gt=time(11, 00))
-    print('Return: ', student_data)
-    return render(request, 'school/home.html', {'students': student_data})
+    # student_data = Student.objects.filter(admission_date__time__gt=time(11, 00))
+    
+    
+    # Database Aggregate Function
+    # student_data = Student.objects.all()
+    average = student_data.aggregate(Avg('marks'))
+    total = student_data.aggregate(Sum('marks'))
+    minimum = student_data.aggregate(Min('marks'))
+    maximum = student_data.aaggregate(Max('marks'))
+    totalcount = student_data.aaggregate(Count('marks'))
+    # print(average)
+    
+    context = {
+        'students': student_data,
+        'average': average,
+        'total': total,
+        'minimum': minimum,
+        'maximum': maximum,
+        'totalcount': totalcount
+    }
+    # print('Return: ', student_data)
+    return render(request, 'school/home.html', context) ##{'students': student_data}
