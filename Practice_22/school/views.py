@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from school.models import Student
+from datetime import date, time
 
 # Create your views here.
 def home(request):
@@ -28,6 +29,9 @@ def home(request):
     # student_data = Student.objects.filter(name__endswith="a")
     
     # Range between two dates
-    student_data = Student.objects.filter(pass_date__range=("2023-10-1", "2025-10-12"))
+    # student_data = Student.objects.filter(pass_date__range=("2024-10-1", "2025-10-12"))
+    
+    # student_data = Student.objects.filter(admission_date__year=2024)
+    student_data = Student.objects.filter(admission_date__time__gt=time(11, 00))
     print('Return: ', student_data)
     return render(request, 'school/home.html', {'students': student_data})
