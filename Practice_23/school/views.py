@@ -12,8 +12,16 @@ def home(request):
     
     # student_data = Student.objects.filter(Q(city='karachi'))
     
-    student_data = Student.objects.filter(Q(city='Swabi') & Q(marks__gte=98))
+    # student_data = Student.objects.filter(Q(city='Swabi') & Q(marks__gte=98))
 
+    # Limit QuerySet
+    # student_data = Student.objects.all()[:5]
+    # student_data = Student.objects.all()[3:5]
+    # student_data = Student.objects.all()[5:]
+    # student_data = Student.objects.all()[:9:2]
+    # student_data = Student.objects.all()[2:8:2]
+    # student_data = Student.objects.all()[1::2]
+    student_data = Student.objects.all()[::3]
     
     context = {
         'students': student_data
