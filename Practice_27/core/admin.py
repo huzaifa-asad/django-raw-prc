@@ -1,0 +1,6 @@
+from django.contrib import admin
+from core.models import Song
+
+@admin.register(Song)
+class SongAdmin(admin.ModelAdmin):
+    list_display = ['title', 'written_by']
