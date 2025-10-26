@@ -1,0 +1,19 @@
+{% extends "myapp/base.html" %}
+{% block content %}
+<table>
+    <h3>Post All Data</h3>
+    <th>Post Title</th>
+    <th>Post Category</th>
+    <th>Published Date</th>
+    <th>Posted By</th>
+    {% for dt1 in data1 %}
+    <tr>
+        <td>{{dt1.title}}</td>
+        <td>{{dt1.ptcat}}</td>
+        <td>{{dt1.ptpublished}}</td>
+        <td>{{dt1.user}}</td>
+    </tr>
+    {% endfor %}
+
+</table>
+{% endblock content %}
