@@ -3,8 +3,6 @@ from django.shortcuts import render
 from .models import *
 from django.views.generic import ListView
 
-
-
 # Functions based Views(FBV)
 def home(request):
     return HttpResponse("Welcome to my Blog!")
