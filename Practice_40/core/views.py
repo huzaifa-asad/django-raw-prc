@@ -8,6 +8,6 @@ def post_list(request):
     paginator = Paginator(all_post, per_page=3)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    print('Page Number ', page_number)
-    print('Page Obj ', page_obj)
+    # print('Page Number ', page_number)
+    # print('Page Obj ', page_obj)
     return render(request, 'core/home.html', {'page_obj': page_obj})
