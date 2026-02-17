@@ -1,4 +1,5 @@
-from django.shortcuts import render, HttpResponse, JsonResponse
+from django.shortcuts import render
+from django.http import HttpResponse, JsonResponse
 from django.views import View
 import httpx
 import time
@@ -40,3 +41,9 @@ class AsyncView(View):
             
         end_time = time.time()
         time_taken = end_time - start_time
+        return JsonResponse({
+            'status': 'success',
+            'view_type': 'sync',
+            'total_request': 5,
+            'time_taken': f"{time_taken:.2f} seconds"
+        })
